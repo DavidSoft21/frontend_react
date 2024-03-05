@@ -63,13 +63,20 @@ class Editar extends React.Component {
       pais,
       ciudad,
     } = this.state;
-    console.log(nombre);
-    console.log(apellido);
-    console.log(razon_social);
-    console.log(cedula);
-    console.log(telefono);
-    console.log(pais);
-    console.log(ciudad);
+
+    // Validación de campos vacíos
+    if (
+      !nombre ||
+      !apellido ||
+      !razon_social ||
+      !cedula ||
+      !telefono ||
+      !pais ||
+      !ciudad
+    ) {
+      alert("Por favor, rellene todos los campos antes de enviar.");
+      return;
+    }
 
     let data = {
       id: id,
@@ -93,15 +100,16 @@ class Editar extends React.Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         alert("Empleado Actualizado");
+        this.setState({ send: true });
       })
       .catch((error) => console.error("Error:", error));
   };
 
   componentDidMount() {
     const id = this.props.match.params.id;
-    console.log(this.props.match.params.id);
+    // console.log(this.props.match.params.id);
     this.cargarDatos(id);
   }
 
@@ -228,7 +236,7 @@ class Editar extends React.Component {
             </div>
             <div className="bnt-group" role="group">
               <button className="btn btn-success align-left" type="submit">
-                agregar
+                editar
               </button>
               <button className="btn btn-danger align-right" type="">
                 cancelar

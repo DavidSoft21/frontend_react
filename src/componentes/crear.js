@@ -26,13 +26,13 @@ class Crear extends React.Component {
 
     const { nombre, apellido, razon_social, cedula, telefono, pais, ciudad } =
       this.state;
-    console.log(nombre);
-    console.log(apellido);
-    console.log(razon_social);
-    console.log(cedula);
-    console.log(telefono);
-    console.log(pais);
-    console.log(ciudad);
+    // console.log(nombre);
+    // console.log(apellido);
+    // console.log(razon_social);
+    // console.log(cedula);
+    // console.log(telefono);
+    // console.log(pais);
+    // console.log(ciudad);
 
     let data = {
       nombre: nombre,
@@ -44,6 +44,20 @@ class Crear extends React.Component {
       ciudad: ciudad,
     };
 
+    // Validación de campos vacíos
+    if (
+      !nombre ||
+      !apellido ||
+      !razon_social ||
+      !cedula ||
+      !telefono ||
+      !pais ||
+      !ciudad
+    ) {
+      alert("Por favor, rellene todos los campos antes de enviar.");
+      return;
+    }
+
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -53,8 +67,8 @@ class Crear extends React.Component {
     fetch(`${process.env.REACT_APP_API}/empleados`, requestOptions)
       .then((resultado) => resultado.json())
       .then((resultado) => {
-          console.log(resultado);
-          alert("Datos guardados");
+        // console.log(resultado);
+        alert("Datos guardados");
         this.setState({ send: true });
       })
       .catch(console.log);
@@ -182,7 +196,7 @@ class Crear extends React.Component {
             </div>
             <div className="bnt-group" role="group">
               <button className="btn btn-success align-left" type="submit">
-                agregar
+                crear
               </button>
               <button className="btn btn-danger align-right" type="">
                 cancelar
